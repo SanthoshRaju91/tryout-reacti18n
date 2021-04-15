@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Layout, Menu, Button } from "antd";
 import { useTranslation } from "react-i18next";
 import "./App.css";
+import { INav, Navs } from "./model";
 
 const { Header, Content } = Layout;
 
@@ -29,9 +30,9 @@ function App() {
             <h2>An Application</h2>
           </div>
           <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["1"]}>
-            <Menu.Item key="1">{t("menu.home")}</Menu.Item>
-            <Menu.Item key="2">{t("menu.performance")}</Menu.Item>
-            <Menu.Item key="3">{t("menu.blog")}</Menu.Item>
+            {Navs.map((Nav: INav) => (
+              <Menu.Item key={Nav.key}>{Nav.label}</Menu.Item>
+            ))}
           </Menu>
         </div>
 
