@@ -27,17 +27,10 @@ function App() {
   function toggleLanguage() {
     // We could have used simple boolean to get the same results.
     // But I want to be explicit in setting the language.
-    if (language === "en") {
-      const lang = "jp";
-      setLanguage(lang);
-      i18n.changeLanguage(lang);
-      saveLanguagePreference(lang);
-    } else {
-      const lang = "en";
-      setLanguage(lang);
-      i18n.changeLanguage(lang);
-      saveLanguagePreference(lang);
-    }
+    const lang = language === "en" ? "jp" : "en";
+    setLanguage(lang);
+    i18n.changeLanguage(lang);
+    saveLanguagePreference(lang);
   }
 
   return (
