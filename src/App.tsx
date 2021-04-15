@@ -31,7 +31,7 @@ function App() {
           </div>
           <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["1"]}>
             {Navs.map((Nav: INav) => (
-              <Menu.Item key={Nav.key}>{Nav.label}</Menu.Item>
+              <Menu.Item key={Nav.key}>{t(Nav.label)}</Menu.Item>
             ))}
           </Menu>
         </div>
