@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Layout, Menu, Button } from "antd";
 import { useTranslation } from "react-i18next";
 import "./App.css";
@@ -6,19 +6,37 @@ import { INav, Navs } from "./model";
 
 const { Header, Content } = Layout;
 
+const LANG = "lang";
+
+function getSavedLanguagePreference() {
+  return window.localStorage.getItem(LANG) || "en";
+}
+
+function saveLanguagePreference(lang: string) {
+  window.localStorage.setItem(LANG, lang);
+}
+
 function App() {
-  const [language, setLanguage] = useState("en");
+  const [language, setLanguage] = useState(getSavedLanguagePreference());
   const { t, i18n } = useTranslation();
+
+  useEffect(() => {
+    i18n.changeLanguage(language);
+  }, [language, i18n]);
 
   function toggleLanguage() {
     // We could have used simple boolean to get the same results.
     // But I want to be explicit in setting the language.
     if (language === "en") {
-      setLanguage("jp");
-      i18n.changeLanguage("jp");
+      const lang = "jp";
+      setLanguage(lang);
+      i18n.changeLanguage(lang);
+      saveLanguagePreference(lang);
     } else {
-      setLanguage("en");
-      i18n.changeLanguage("en");
+      const lang = "en";
+      setLanguage(lang);
+      i18n.changeLanguage(lang);
+      saveLanguagePreference(lang);
     }
   }
 
